@@ -1,0 +1,20 @@
+.toolbar-btn-large {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 40px;
+  background-color: #f2f2f2;
+  color: #0069d9;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  font-size: 2rem;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.toolbar-btn-large:hover {
+  background-color: #e2e2e2;
+}

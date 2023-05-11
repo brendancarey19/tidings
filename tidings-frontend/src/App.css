@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.toolbar-container {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  background-color: #0069d9;
+  color: white;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  padding: 1rem;
+}
+
+.main-container {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto; /* Add this to enable scrolling when content exceeds container height */
+}
