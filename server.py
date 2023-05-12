@@ -42,6 +42,7 @@ def get_data_local():
 @app.route("/api/data", methods=["GET"])
 @cross_origin()
 def get_data():
+    print("REQUEST SENT")
     with open("urls.txt") as f:
         links = [line.strip() for line in f]
 
@@ -50,6 +51,8 @@ def get_data():
     for link in links:
         for x in get_articles(link):
             to_read.append(x)
+            break
+        break
 
     articles = read_articles(to_read)
 

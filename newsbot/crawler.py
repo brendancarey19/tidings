@@ -5,13 +5,15 @@ import nltk
 
 
 class Article:
-    def __init__(self, url, title, response):
+    def __init__(self, url, title, image, response):
         self.url = url
         self.title = title
+        self.image = image
         self.bullets = response["choices"][0]["message"]["content"].replace(". ", "\n")
 
 
 def get_articles(url):
+
     ap = newspaper.build(
         url,
         memoize_articles=False,
@@ -29,9 +31,12 @@ def read_articles(urls):
     articles = []
     for url in urls:
         try:
-            article = NewsPlease.from_url(url)
+            # article = NewsPlease.from_url(url)
+            article = newspaper.Article(url)
+            article.download()
+            article.parse()
 
-            sentences = nltk.sent_tokenize(article.maintext)
+            sentences = nltk.sent_tokenize(article.text)
 
             num_sentences = int(len(sentences) * 0.25)
 
@@ -39,7 +44,7 @@ def read_articles(urls):
 
             response = summarize(article, longest_sentences)
 
-            to_add = Article(article.url, article.title, response)
+            to_add = Article(article.url, article.title, article.top_image, response)
             articles.append(to_add)
 
         except Exception as e:

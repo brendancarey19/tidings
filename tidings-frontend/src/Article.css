@@ -3,6 +3,8 @@
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .article-container > :last-child {
@@ -21,9 +23,9 @@
   color: #0069d9;
 }
 
-
 .article-bullets li {
   margin-bottom: 5px;
+  text-indent: -1.5em; /* Adjust the indentation as needed */
 }
 
 .article-bullets li::marker {
@@ -33,8 +35,24 @@
 .article-bullets {
   list-style-type: disc;
   font-family: "Arial", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: #333333;
   list-style-position: inside;
-  padding-left: 0;
+  padding-left: 1.2em;
+  padding-right: 20px;
+}
+
+.article-image {
+  width: 600px; /* Adjust the width as needed */
+  height: 350px; /* Adjust the height as needed */
+  align-self: flex-end;
+  margin-left: auto;
+}
+.article-image {
+  width: 600px; /* Adjust the width as needed */
+  height: 350px; /* Adjust the height as needed */
+  align-self: flex-end;
+  margin-left: auto;
+  border: 5px dashed #0069d9;
+  object-fit: cover;
 }

@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     if (loadData) {
-      fetch("http://127.0.0.1:8080/api/data_local")
+      fetch("http://127.0.0.1:8080/api/data")
         .then((response) => response.json())
         .then((data) => setData(data))
         .catch((error) => console.log(error));
@@ -28,6 +28,7 @@ function App() {
             title={article.title}
             url={article.url}
             bullets={article.bullets}
+            display_pic={article.image}
           />
         ))}
       </div>
