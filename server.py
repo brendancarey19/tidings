@@ -47,12 +47,15 @@ def get_data():
         links = [line.strip() for line in f]
 
     to_read = []
-
+    i = 0
     for link in links:
         for x in get_articles(link):
+            i += 1
             to_read.append(x)
+            if i == 2:
+                break
+        if i == 2:
             break
-        break
 
     articles = read_articles(to_read)
 
