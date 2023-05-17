@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Article from './Article';
 import Toolbar from './Toolbar';
+import logo from "./static/logo.png";
 
 function App() {
   const [data, setData] = useState([]);
@@ -21,16 +22,21 @@ function App() {
       <div className="toolbar-container">
         <Toolbar onLoadData={() => setLoadData(true)} />
       </div>
-      <div className="main-container">
-        {data.map((article) => (
-          <Article
-            key={article.url}
-            title={article.title}
-            url={article.url}
-            bullets={article.bullets}
-            display_pic={article.image}
-          />
-        ))}
+      <div className="content-container">
+        <div className="logo-container">
+          <img src={logo} alt="Logo" className="logo" />
+        </div>
+        <div className="main-container">
+          {data.map((article) => (
+            <Article
+              key={article.url}
+              title={article.title}
+              url={article.url}
+              bullets={article.bullets}
+              display_pic={article.image}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
