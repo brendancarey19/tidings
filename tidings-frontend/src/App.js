@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     if (loadData) {
-      fetch("http://127.0.0.1:8080/api/data")
+      fetch("http://127.0.0.1:8080/api/data_local")
         .then((response) => response.json())
         .then((data) => setData(data))
         .catch((error) => console.log(error));
