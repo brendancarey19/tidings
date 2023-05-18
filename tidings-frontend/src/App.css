@@ -30,8 +30,14 @@
   overflow-y: auto;
 }
 
-.logo {
+.logo-container {
   max-height: 45px;
   margin-right: 1rem;
   padding-left: 20px;
+  position: relative;
+}
+
+.logo {
+  max-height: 50px;
+  margin-right: 1rem;
 }

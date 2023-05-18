@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Rubik:wght@400&display=swap');
 .article-container {
   background-color: #f2f2f2;
   border-radius: 10px;
@@ -12,7 +13,7 @@
 }
 
 .article-title {
-  font-family: "Arial", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 1.5rem;
   margin: 0;
   padding: 0;
@@ -25,8 +26,8 @@
 }
 
 .article-bullets li {
-  margin-bottom: 5px;
-  text-indent: -1.5em; /* Adjust the indentation as needed */
+  margin-bottom: 10px;
+  text-indent: -1.4em; /* Adjust the indentation as needed */
 }
 
 .article-bullets li::marker {
@@ -54,7 +55,7 @@
   height: 350px; /* Adjust the height as needed */
   align-self: flex-end;
   margin-left: auto;
-  border: 2px solid #0069d9;
-  border-radius: 20px;
+  border-left: 12px solid #0069d9;
+  padding-left: 2px;
   object-fit: cover;
 }

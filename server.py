@@ -5,6 +5,7 @@ from flask_cors import CORS, cross_origin
 from newsbot.crawler import get_articles, read_articles
 import os
 import sqlite3
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -18,13 +19,13 @@ def get_data_local():
     cursor = conn.cursor()
 
     # Retrieve the articles from the database
-    cursor.execute("SELECT * FROM local_articles LIMIT 14")
+    cursor.execute("SELECT * FROM local_articles")
     rows = cursor.fetchall()
 
     # Convert the articles to a list of dictionaries
     articles = []
     for row in rows:
-        article = {"title": row[0], "url": row[1], "bullets": row[2]}
+        article = {"title": row[0], "url": row[1], "image": row[2], "bullets": row[3]}
         articles.append(article)
 
     # Close the database connection
@@ -43,6 +44,7 @@ def get_data_local():
 @cross_origin()
 def get_data():
     print("REQUEST SENT")
+    start = time.time()
     with open("urls.txt") as f:
         links = [line.strip() for line in f]
 
@@ -52,9 +54,9 @@ def get_data():
         for x in get_articles(link):
             i += 1
             to_read.append(x)
-            if i == 2:
+            if i == 10:
                 break
-        if i == 2:
+        if i == 10:
             break
 
     articles = read_articles(to_read)
@@ -67,7 +69,7 @@ def get_data():
 
     # Set the content type header to application/json
     headers = {"Content-Type": "application/json"}
-
+    print("time: " + str(time.time() - start))
     return response, 200, headers
 
 

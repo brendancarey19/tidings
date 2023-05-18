@@ -1,15 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Rubik:wght@600&display=swap');
+
+.toolbar {
+  margin-top: 200px;
+}
+
 .toolbar-btn-large {
   display: block;
   width: 100%;
   padding: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   background-color: #f2f2f2;
   color: #0069d9;
   font-weight: bold;
   border: none;
   border-radius: 5px;
-  font-size: 2rem;
-  font-family: "Arial", sans-serif;
+  font-size: 1.2rem;
+  font-family: 'Rubik', sans-serif;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
