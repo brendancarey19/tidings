@@ -3,3 +3,5 @@ data.json
 fook.json
 loaddb.py
 urls_master.txt
+flask_session/
+session_data/

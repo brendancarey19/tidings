@@ -1,11 +1,16 @@
 import React from "react";
-import "./Article.css"; // Import the CSS file with the styles
+import "./Article.css";
 
-const Article = ({ title, url, bullets }) => {
-    const bulletPoints = bullets.split("\n");
-  
-    return (
-      <div className="article-container">
+const Image = ({ src, alt }) => {
+  return <img className="article-image" src={src} alt={alt} />;
+};
+
+const Article = ({ title, url, bullets, display_pic }) => {
+  const bulletPoints = bullets.split("\n");
+
+  return (
+    <div className="article-container">
+      <div className="article-content">
         <h2 className="article-title">
           <a href={url}>{title}</a>
         </h2>
@@ -15,7 +20,9 @@ const Article = ({ title, url, bullets }) => {
           ))}
         </ul>
       </div>
-    );
-  };
+      {display_pic && <Image src={display_pic} alt={title} />}
+    </div>
+  );
+};
 
 export default Article;
