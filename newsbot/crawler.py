@@ -14,7 +14,6 @@ class Article:
 
 
 def get_articles(url):
-
     ap = newspaper.build(
         url,
         memoize_articles=False,
@@ -51,12 +50,13 @@ def process_article(url):
         print("WARNING: Article not parsed due to: " + str(e))
         return None
 
+
 def read_articles(urls):
     articles = []
-    
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
         future_to_url = {executor.submit(process_article, url): url for url in urls}
-        
+
         for future in concurrent.futures.as_completed(future_to_url):
             url = future_to_url[future]
             try:
@@ -65,5 +65,5 @@ def read_articles(urls):
                     articles.append(result)
             except Exception as e:
                 print(f"Error processing article from {url}: {str(e)}")
-    
+
     return articles
