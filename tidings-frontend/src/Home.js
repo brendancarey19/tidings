@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './App.css';
 import Article from './Article';
+import "./Home.css"
+import { NewtonsCradle } from '@uiball/loaders'
 
 function Home() {
   const bottomRef = useRef(null);
@@ -9,6 +10,7 @@ function Home() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+  const [isNextDataLoading, setIsNextDataLoading] = useState(false);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8080/api/load_on_start", {
@@ -21,13 +23,14 @@ function Home() {
         setInitialDataLoaded(true);
       })
       .then(() => {
-        setPage((prevPage) => prevPage + 1); // Increment the page to trigger the next data fetch
+        setPage((prevPage) => prevPage + 1);
       })
       .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
     if (page > 1 && initialDataLoaded) { 
+      setIsNextDataLoading(true);
       fetch(`http://127.0.0.1:8080/api/data?page=${page}`, {
         method: 'GET',
         credentials: 'include', 
@@ -35,9 +38,13 @@ function Home() {
         .then((response) => response.json())
         .then((newData) => {
           setNextData(newData);
+          setIsNextDataLoading(false);
           setIsLoading(false);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          setIsNextDataLoading(false);
+        });
     }
   }, [page, initialDataLoaded]); 
 
@@ -45,7 +52,7 @@ function Home() {
     if (nextData.length > 0) {
       setData((prevData) => [...prevData, ...nextData]);
       setNextData([]);
-      setPage((prevPage) => prevPage + 1); // Trigger fetch for new next data
+      setPage((prevPage) => prevPage + 1);
     }
   };
 
@@ -74,7 +81,7 @@ function Home() {
       const target = entries[0];
       if (target.isIntersecting) {
         handleDisplayNextData();
-        setIsLoading(false); // Set to false as we're immediately handling the data
+        setIsLoading(false);
       }
     };
 
@@ -105,15 +112,13 @@ function Home() {
         />
       ))}
       <div ref={bottomRef} style={{ visibility: 'hidden' }}></div>
-      {isLoading && <p>Loading more articles...</p>}
+      {isNextDataLoading && (
+      <div className="loader-container">
+        <NewtonsCradle size={65} speed={1.8} color="#0069d9" />
+      </div>
+      )}
     </div>
   );
 }
 
 export default Home;
-
-
-
-
-
-
