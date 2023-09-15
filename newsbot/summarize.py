@@ -1,29 +1,24 @@
-import requests
-import openai
+import cohere
+import sys
 import json
 
-URL = "https://api.openai.com/v1/chat/completions"
-
-
 def summarize(article, longest_sentences):
-    token = "<redacted>"
-    prompt = (
-        f"After the colon are sentences from a news article with the title + {article.title}. Respond with nothing but up to 5 sentences that summarize this article: "
-        + str(longest_sentences)
-    )
+    token = ""
+    co = cohere.Client(token)
 
-    messages = [{"role": "user", "content": prompt}]
-    data = {
-        "model": "gpt-3.5-turbo",
-        "messages": messages,
-        "temperature": 0.5,
-    }
-    header = {"Authorization": "Bearer " + token}
-    response = requests.post(URL, json=data, headers=header)
-    response = response.json()
+    text = ' '.join(longest_sentences)
 
-    with open("data.json", "a") as f:
-        json.dump(response, f)
-        f.write("\n\n")
+    try:
+        response = co.summarize(
+            text=text,
+            model='command',
+            length='long',
+            extractiveness='low',
+            format="bullets"
+        )
+        print(response.summary)
+    except Exception as e:
+        print(e)
 
-    return response
+    with open("cohere.txt", 'a') as file:
+        file.write(str(str(article.url) + "\n" + response.summary + "\n"))

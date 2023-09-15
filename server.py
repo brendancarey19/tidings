@@ -1,4 +1,3 @@
-from email import header
 import json
 from flask import Flask, jsonify, current_app, make_response, session
 from flask_cors import CORS, cross_origin
